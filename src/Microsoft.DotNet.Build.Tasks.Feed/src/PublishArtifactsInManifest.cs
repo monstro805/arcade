@@ -102,7 +102,6 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
         /// Whether this build is internal or not. If true, extra checks are done to avoid accidental
         /// publishing of assets to public feeds or storage accounts.
         /// </summary>
-        [Required]
         public bool InternalBuild { get; set; }
 
         public bool PublishInstallersAndChecksums { get; set; } = false;
@@ -303,7 +302,6 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 BuildAssetRegistryToken = this.BuildAssetRegistryToken,
                 MaxClients = this.MaxClients,
                 NugetPath = this.NugetPath,
-                InternalBuild = this.InternalBuild,
                 SkipSafetyChecks = this.SkipSafetyChecks,
                 AkaMSClientId = this.AkaMSClientId,
                 AkaMSClientSecret = this.AkaMSClientSecret,
