@@ -209,7 +209,7 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                         IMaestroApi client = ApiFactory.GetAuthenticated(MaestroApiEndpoint, BuildAssetRegistryToken);
                         Maestro.Client.Models.Build buildInformation = await client.Builds.GetBuildAsync(BARBuildId);
 
-                        var targetChannelsIds = TargetChannels.Split(',').Select(ci => int.Parse(ci));
+                        var targetChannelsIds = TargetChannels.Split(';').Select(ci => int.Parse(ci));
                         Log.LogMessage(MessageImportance.High, "Target channels : " + targetChannelsIds);
 
                         foreach (var targetChannelId in targetChannelsIds)
