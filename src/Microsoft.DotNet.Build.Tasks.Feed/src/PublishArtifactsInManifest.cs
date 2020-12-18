@@ -210,10 +210,12 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                         Maestro.Client.Models.Build buildInformation = await client.Builds.GetBuildAsync(BARBuildId);
 
                         var targetChannelsIds = TargetChannels.Split(',').Select(ci => int.Parse(ci));
+                        Log.LogMessage(MessageImportance.High, "Target channels : " + targetChannelsIds);
 
                         foreach (var targetChannelId in targetChannelsIds)
                         {
                             await client.Channels.AddBuildToChannelAsync(BARBuildId, targetChannelId);
+                            Log.LogMessage(MessageImportance.High, "Publishing to target channel : " + targetChannelId);
                         }
                     }
 
