@@ -61,7 +61,7 @@ jobs:
         arguments: -task PublishArtifactsInManifest -restore -msbuildEngine dotnet
           /p:PublishingInfraVersion=3
           /p:BARBuildId=$(BARBuildId)
-          /p:TargetChannels='${{ parameters.PromoteToChannelIds.Replace(",","%2c") }}'
+          /p:TargetChannels='${{ parameters.PromoteToChannelIds }}'.Replace("," , "%2c")
           /p:IsInternalBuild=${{ and(ne(variables['System.TeamProject'], 'public'), contains(variables['Build.SourceBranch'], 'internal')) }}
           /p:NugetPath=$(NuGetExeToolPath)
           /p:MaestroApiEndpoint='$(MaestroApiEndPoint)'
