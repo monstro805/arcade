@@ -131,7 +131,7 @@ stages:
           env:
             MAESTRO_API_TOKEN: $(MaestroApiAccessToken)
             BARBuildId: ${{ parameters.BARBuildId }}
-            PromoteToChannelIds: ${{ parameters.PromoteToChannelIds }}.Replace(",","%2c")
+            PromoteToChannelIds: ${{ parameters.PromoteToChannelIds }}.Replace(";","%3c")
 
 - ${{ if le(parameters.PublishingInfraVersion, 2) }}:
   - template: \eng\common\templates\post-build\post-build.yml
