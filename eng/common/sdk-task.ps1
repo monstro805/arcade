@@ -2,7 +2,7 @@
 Param(
   [string] $configuration = 'Debug',
   [string] $task,
-  [string] $verbosity = 'minimal',
+  [string] $verbosity = 'detailed',
   [string] $msbuildEngine = $null,
   [switch] $restore,
   [switch] $prepareMachine,
