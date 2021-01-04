@@ -155,7 +155,7 @@ stages:
 - ${{ if ge(parameters.PublishingInfraVersion, 3) }}:
   - template: \eng\publishing\v3\publish.yml
     parameters:
-      PromoteToChannelIds: ${{ parameters.PromoteToChannelIds }}
+      PromoteToChannelIds: replace(${{ parameters.PromoteToChannelIds }}, ',' , '%2c')
       BARBuildId: ${{ parameters.BARBuildId }}
     
       enableSourceLinkValidation: ${{ parameters.EnableSourceLinkValidation }}
