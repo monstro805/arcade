@@ -52,6 +52,11 @@ try {
     exit 0
   }
 
+  if($properties.Contains(',')){
+    $properties.Replace(',','%2c')
+    Print $properties
+  }
+
   if ($task -eq "") {
     Write-PipelineTelemetryError -Category 'Build' -Message "Missing required parameter '-task <value>'" -ForegroundColor Red
     Print-Usage
