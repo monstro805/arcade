@@ -59,7 +59,7 @@ jobs:
       inputs:
         filePath: $(Build.SourcesDirectory)/eng/common/sdk-task.ps1
         arguments: -task PublishArtifactsInManifest -restore -msbuildEngine dotnet
-          /p:TargetChannels='${{ parameters.PromoteToChannelIds }}'
+          /p:TargetChannels='529-1647'
           /p:PublishingInfraVersion=3
           /p:BARBuildId=$(BARBuildId)
           /p:IsInternalBuild=${{ and(ne(variables['System.TeamProject'], 'public'), contains(variables['Build.SourceBranch'], 'internal')) }}

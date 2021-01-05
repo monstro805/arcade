@@ -52,8 +52,8 @@ try {
     exit 0
   }
 
-  if($properties.Contains(',')){
-    $properties.Replace(',','%2c')
+  if($properties.Contains('-')){
+    $properties.Replace('-','%2c')
     Print $properties
   }
 

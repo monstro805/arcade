@@ -90,7 +90,7 @@ stages:
                   }
 
                   $channels = ${Env:PromoteToChannelIds} -split ","
-                  $channelsToPromote = $channels -join "%2c"
+
                   foreach ($channelId in $channels) {
                     $channelApiEndpoint = "$(MaestroApiEndPoint)/api/channels/${channelId}?api-version=$(MaestroApiVersion)"
                     $channelInfo = try { Invoke-WebRequest -Method Get -Uri $channelApiEndpoint -Headers $apiHeaders | ConvertFrom-Json } catch { Write-Host "Error: $_" }
@@ -132,7 +132,7 @@ stages:
           env:
             MAESTRO_API_TOKEN: $(MaestroApiAccessToken)
             BARBuildId: ${{ parameters.BARBuildId }}
-            PromoteToChannelIds: $channelsToPromote
+            PromoteToChannelIds: ${{ parameters.PromoteToChannelIds }}
             
 
 - ${{ if le(parameters.PublishingInfraVersion, 2) }}:
@@ -156,7 +156,10 @@ stages:
 - ${{ if ge(parameters.PublishingInfraVersion, 3) }}:
   - template: \eng\publishing\v3\publish.yml
     parameters:
-      PromoteToChannelIds: replace(${{ parameters.PromoteToChannelIds }}, ',' , '%2c')
+      condition: if( contains(${{parameters.PromoteToChannelIds}}, ','))
+      PromoteToChannelIds: ${{ parameters.PromoteToChannelIds }}
+      
+      
       BARBuildId: ${{ parameters.BARBuildId }}
     
       enableSourceLinkValidation: ${{ parameters.EnableSourceLinkValidation }}
