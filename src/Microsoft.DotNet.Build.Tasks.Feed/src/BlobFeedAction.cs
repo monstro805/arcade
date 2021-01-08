@@ -190,9 +190,11 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                 }
                 else
                 {
-                    FileStream stream = new FileStream(item.ItemSpec, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    Log.LogMessage($"Uploading {item} to {relativeBlobPath}.");
-                    await blobUtils.UploadBlockBlobAsync(item.ItemSpec, relativeBlobPath, stream);
+                    using FileStream stream = new FileStream(item.ItemSpec, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    {
+                        Log.LogMessage($"Uploading {item} to {relativeBlobPath}.");
+                        await blobUtils.UploadBlockBlobAsync(item.ItemSpec, relativeBlobPath, stream);
+                    }
                 }
             }
             catch (Exception exc)
