@@ -185,12 +185,13 @@ namespace Microsoft.DotNet.Build.Tasks.Feed
                     }
                     else
                     {
-                        Log.LogError($"Item '{item}' already exists at '{relativeBlobPath}'");
+                        Log.LogMessage($"Item '{item}' already exists at '{relativeBlobPath}', skipping uploading '{item}'.");
                     }
                 }
                 else
                 {
-                    using FileStream stream = new FileStream(item.ItemSpec, FileMode.Open, FileAccess.Read, FileShare.Read);
+                    using (FileStream stream =
+                        new FileStream(item.ItemSpec, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         Log.LogMessage($"Uploading {item} to {relativeBlobPath}.");
                         await blobUtils.UploadBlockBlobAsync(item.ItemSpec, relativeBlobPath, stream);
