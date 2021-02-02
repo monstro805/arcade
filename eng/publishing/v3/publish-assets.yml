@@ -85,7 +85,7 @@ jobs:
           ${{ parameters.symbolPublishingAdditionalParameters}}
           /p:MsdlToken=$(microsoft-symbol-server-pat)
           /p:SymWebToken=$(symweb-symbol-server-pat)
-          /p:BuildQuality='${{ parameters.buildQuality }}'
+          /p:BuildQuality='signed'
 
     - template: /eng/common/templates/steps/publish-logs.yml
       parameters:
