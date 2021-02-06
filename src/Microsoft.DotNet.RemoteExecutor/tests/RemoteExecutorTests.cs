@@ -36,14 +36,12 @@ namespace Microsoft.DotNet.RemoteExecutor.Tests
         [Fact]
         public void AsyncFunc_ThrowException()
         {
-            Assert.Throws<RemoteExecutionException>(() =>
-                RemoteExecutor.Invoke(async () =>
-                {
-                    Assert.True(false);
-                    await Task.Delay(1);
-                    return 1;
-                }, new RemoteInvokeOptions { RollForward = "Major" }).Dispose()
-            );
+            RemoteExecutor.Invoke(async () =>
+            {
+                Assert.True(false);
+                await Task.Delay(1);
+                return 1;
+            }, new RemoteInvokeOptions {RollForward = "Major"}).Dispose();
         }
 
         [Fact]
